@@ -4,8 +4,8 @@ import Layout from "../components/Layout";
 const Home = () => {
   return (
     <>
-      <Layout>
-        <div>hellow</div>
+      <Layout title="Home Page">
+        Home Page
       </Layout>
     </>
   );
