@@ -1,0 +1,20 @@
+[
+    {
+        "id": 1,
+        "price": 150,
+        "title": "Book 1",
+        "slug": "book-1",
+        "description": "Book About Conutry",
+        "count": 10,
+        "image": "images/book.jpg"
+    },
+    {
+        "id": 2,
+        "price": 200,
+        "title": "Book 2",
+        "slug": "book-2",
+        "description": "Book About Conutry",
+        "count": 10,
+        "image": "images/book.jpg"
+    }
+]
