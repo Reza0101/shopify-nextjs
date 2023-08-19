@@ -22,6 +22,7 @@ const ProductPage = () => {
       <div className="grid md:grid-cols-4 md:gap-3 bg-white rounded-xl p-10">
         <div className="md:cols-span-2">
           <Image
+            alt="Product Image"
             className="rounded-xl"
             src={product.image}
             width={340}
