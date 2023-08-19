@@ -14,6 +14,8 @@ const reducer = (state: any, action: iAction) => {
     case "ADD_ITEMS": {
       const newItem: any = action.payload;
 
+      
+
       const existingItem = state.cart.cartItems.find(
         (item: any) => item.slug === newItem.slug
       );
@@ -23,6 +25,8 @@ const reducer = (state: any, action: iAction) => {
             item.title === existingItem.title ? newItem : item
           )
         : [...state.cart.cartItems, newItem];
+
+        
 
         return {...state, cart: { ...state.cart, cartItems }}
     }

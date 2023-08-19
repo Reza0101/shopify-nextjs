@@ -25,7 +25,6 @@ const ProductPage = () => {
 
     dispatch({ type: "ADD_ITEMS", payload: { ...product, qty } })
 
-    console.log(state);
     
 
   };
