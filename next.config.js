@@ -4,3 +4,13 @@ const nextConfig = {
 }
 
 module.exports = nextConfig
+
+
+
+module.exports = {
+  reactStrictMode: true,
+  images: {
+      domains: ["yourDomain.com"],
+      formats: ["image/webp"],
+  },
+};

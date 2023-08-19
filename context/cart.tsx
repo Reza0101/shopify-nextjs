@@ -22,7 +22,7 @@ const reducer = (state: any, action: iAction) => {
         ? state.cart.cartItems.map((item: any) =>
             item.title === existingItem.title ? newItem : item
           )
-        : [...state.cart.cartItem, newItem];
+        : [...state.cart.cartItems, newItem];
 
         return {...state, cart: { ...state.cart, cartItems }}
     }

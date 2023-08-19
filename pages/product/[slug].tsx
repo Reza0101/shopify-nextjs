@@ -1,9 +1,12 @@
 import Layout from "@/components/Layout";
 import productData from "../../data/products.json";
 import { useRouter } from "next/router";
-import Image, { ImageProps } from "next/image";
+import { useContext } from "react";
+import { CartContext } from "../../context/cart";
 
 const ProductPage = () => {
+  const { state, dispatch } = useContext(CartContext);
+
   const { query } = useRouter();
   const { slug } = query;
 
@@ -13,21 +16,30 @@ const ProductPage = () => {
     return <div>Product not found🤦‍♂️</div>;
   }
 
-  type Image = {
-    image?: ImageProps;
+  const addToCartHandler = () => {
+    const existingItem = state.cart.cartItems.find(
+      (item: any) => item.slug === product.slug
+    );
+
+    const qty = existingItem ? existingItem.qty + 1 : 1
+
+    dispatch({ type: "ADD_ITEMS", payload: { ...product, qty } })
+
+    console.log(state);
+    
+
   };
 
   return (
     <Layout title={`${product.title}`}>
       <div className="grid md:grid-cols-4 md:gap-3 bg-white rounded-xl p-10">
         <div className="md:cols-span-2">
-          <Image
+          <img
             alt="Product Image"
             className="rounded-xl"
-            src={product.image}
+            src={`${product.image}`}
             width={340}
             height={340}
-            layout="responsive"
           />
         </div>
         <div className="text-lg">
@@ -44,7 +56,10 @@ const ProductPage = () => {
             <div>Status:</div>
             <div>{product.count ? "Availabe" : "Unavanalible"}</div>
           </div>
-          <button className="rounded-xl bg-gray-700 text-white px-4 py-2 w-full">
+          <button
+            onClick={addToCartHandler}
+            className="rounded-xl bg-gray-700 text-white px-4 py-2 w-full"
+          >
             Add to Cart
           </button>
         </div>
