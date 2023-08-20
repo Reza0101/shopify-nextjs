@@ -23,6 +23,10 @@ const ProductPage = () => {
 
     const qty = existingItem ? existingItem.qty + 1 : 1
 
+    if (product.count < qty) {
+      return true
+    }
+
     dispatch({ type: "ADD_ITEMS", payload: { ...product, qty } })
 
     
