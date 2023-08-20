@@ -10,8 +10,8 @@ const Cart = () => {
   } = state;
 
   const remoreHandler = (item: any) => {
-    dispatch({ type: 'REMOVE_ITEM', payload: item })
-  }
+    dispatch({ type: "REMOVE_ITEM", payload: item });
+  };
 
   return (
     <Layout title="Shopping Cart">
@@ -33,12 +33,27 @@ const Cart = () => {
                 <div className="flex p-1 w-[700px] mx-auto items-center justify-evenly">
                   <p className="w-[50px] text-center">{item.title}</p>
                   <p className="w-[50px] text-center">{item.qty}</p>
-                  <img className="rounded-lg w-[50px] text-center" src={item.image} />
+                  <img
+                    className="rounded-lg w-[50px] text-center"
+                    src={item.image}
+                  />
                   <p className="w-[50px] text-center">{item.price}$</p>
-                  <button className="w-[50px] text-center" onClick={() => remoreHandler(item)}>Remove</button>
+                  <button
+                    className="w-[50px] text-center"
+                    onClick={() => remoreHandler(item)}
+                  >
+                    Remove
+                  </button>
                 </div>
               ))}
             </div>
+          </div>
+          <div className="font-bold">
+            Total Price:
+            {cartItems.reduce(
+              (acc: any, cur: any) => acc + cur.qty * cur.price,
+              0
+            )}
           </div>
         </>
       )}
