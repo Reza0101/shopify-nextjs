@@ -5,6 +5,7 @@ import { useContext } from "react";
 import { CartContext } from "../../context/cart";
 
 const ProductPage = () => {
+  const route = useRouter();
   const { state, dispatch } = useContext(CartContext);
 
   const { query } = useRouter();
@@ -21,16 +22,16 @@ const ProductPage = () => {
       (item: any) => item.slug === product.slug
     );
 
-    const qty = existingItem ? existingItem.qty + 1 : 1
+    const qty = existingItem ? existingItem.qty + 1 : 1;
 
     if (product.count < qty) {
-      return true
+      return true;
     }
 
-    dispatch({ type: "ADD_ITEM", payload: { ...product, qty } })
+    dispatch({ type: "ADD_ITEM", payload: { ...product, qty } });
 
-    
 
+    route.push("/cart");
   };
 
   return (

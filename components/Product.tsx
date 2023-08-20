@@ -11,6 +11,7 @@ const Product = ({ item }: any) => {
             <h2 className="text-lg">{item.title}</h2>
         </Link>
         <p className="p-2">{item.price}</p>
+        
         <button className="rounded-xl bg-gray-700 text-white px-4 py-2">Add to Cart</button>
       </div>
     </div>
