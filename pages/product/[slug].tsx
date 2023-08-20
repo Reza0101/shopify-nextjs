@@ -27,7 +27,7 @@ const ProductPage = () => {
       return true
     }
 
-    dispatch({ type: "ADD_ITEMS", payload: { ...product, qty } })
+    dispatch({ type: "ADD_ITEM", payload: { ...product, qty } })
 
     
 

@@ -1,20 +1,20 @@
 import { createContext, useReducer } from "react";
 
-interface iAction {
-  type: string;
-  payload: {};
-}
-
 const initialState = {
   cart: { cartItems: [] },
 };
 
-const reducer = (state: any, action: iAction) => {
+const reducer = (state: any, action: any) => {
   switch (action.type) {
-    case "ADD_ITEMS": {
-      const newItem: any = action.payload;
+    case "REMOVE_ITEM": {
+      const cartItems = state.cart.cartItems.filter(
+        (item: any) => item.slug !== action.payload.slug
+      );
 
-      
+      return {...state, cart: {...state.cart, cartItems}}
+    }
+    case "ADD_ITEM": {
+      const newItem: any = action.payload;
 
       const existingItem = state.cart.cartItems.find(
         (item: any) => item.slug === newItem.slug
@@ -26,26 +26,19 @@ const reducer = (state: any, action: iAction) => {
           )
         : [...state.cart.cartItems, newItem];
 
-        
-
-        return {...state, cart: { ...state.cart, cartItems }}
+      return { ...state, cart: { ...state.cart, cartItems } };
     }
-    default : 
-        return state
+    default:
+      return state;
   }
 };
 
 export let CartContext = createContext<any>([]);
 
+export const CartContextProvider = ({ children }: any) => {
+  const [state, dispatch] = useReducer(reducer, initialState);
 
+  const value = { state, dispatch };
 
-export const CartContextProvider = ({children}: any) => {
-    const [state, dispatch] = useReducer(reducer, initialState);
-
-    const value = {state , dispatch}
-
-    return <CartContext.Provider value={value}>
-      {children}
-    </CartContext.Provider>
-}
- 
+  return <CartContext.Provider value={value}>{children}</CartContext.Provider>;
+};

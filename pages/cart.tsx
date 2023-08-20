@@ -9,13 +9,15 @@ const Cart = () => {
     cart: { cartItems },
   } = state;
 
-  console.log(cartItems);
+  const remoreHandler = (item: any) => {
+    dispatch({ type: 'REMOVE_ITEM', payload: item })
+  }
 
   return (
     <Layout title="Shopping Cart">
       <h1 className="mb-4 text-xl">Shopping Cart</h1>
       {!cartItems.length ? (
-        <div>Cart is not empty.</div>
+        <div>Cart is empty.</div>
       ) : (
         <>
           <div className="container my-5 overflow-scroll">
@@ -33,7 +35,7 @@ const Cart = () => {
                   <p className="w-[50px] text-center">{item.qty}</p>
                   <img className="rounded-lg w-[50px] text-center" src={item.image} />
                   <p className="w-[50px] text-center">{item.price}$</p>
-                  <button className="w-[50px] text-center">Remove</button>
+                  <button className="w-[50px] text-center" onClick={() => remoreHandler(item)}>Remove</button>
                 </div>
               ))}
             </div>
