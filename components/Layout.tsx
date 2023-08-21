@@ -1,7 +1,7 @@
 import Head from "next/head";
 import Link from "next/link";
 
-import { useContext } from "react";
+import { useContext, useState, useEffect } from "react";
 import { CartContext } from "../context/cart";
 
 type Props = {
@@ -10,8 +10,15 @@ type Props = {
 };
 function Layout({ children, title }: Props) {
   const { state, dispatch } = useContext(CartContext);
-
   const { cart } = state;
+
+  const [cartItemsCount, setItemsCount] = useState(0);
+
+  useEffect(() => {
+    setItemsCount(
+      cart.cartItems.reduce((acc: any, cur: any) => acc + cur.qty, 0)
+    );
+  }, [cart.cartItems]);
 
   return (
     <>
@@ -26,14 +33,14 @@ function Layout({ children, title }: Props) {
             </Link>
             <div className="flex font-bold">
               <Link href="/cart">
-                <p className="p-2">
-                  Cart
-                  {cart.cartItems.length && (
-                    <span className="ml-1 rounded-xl bg-gray-200 px-2 py-1">
-                      {cart.cartItems.reduce((acc: any, cur: any) => acc + cur.qty,0)}
-                    </span>
+                <div className="p-2">
+                  <p>Cart</p>
+                  {cart.cartItems && (
+                    <p className="ml-1 rounded-xl bg-gray-200 px-2 py-1">
+                      {cartItemsCount ? cartItemsCount : ""}
+                    </p>
                   )}
-                </p>
+                </div>
               </Link>
               <Link href="/login">
                 <p className="p-2">Login</p>

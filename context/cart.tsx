@@ -1,7 +1,10 @@
 import { createContext, useReducer } from "react";
+import Cookies from "js-cookie";
 
 const initialState = {
-  cart: { cartItems: [] },
+  cart: Cookies.get("cart")
+    ? JSON.parse(Cookies.get("cart")!)
+    : { cartItems: [] },
 };
 
 const reducer = (state: any, action: any) => {
@@ -11,7 +14,9 @@ const reducer = (state: any, action: any) => {
         (item: any) => item.slug !== action.payload.slug
       );
 
-      return {...state, cart: {...state.cart, cartItems}}
+      Cookies.set("cart", JSON.stringify({ ...state.cart, cartItems }));
+
+      return { ...state, cart: { ...state.cart, cartItems } };
     }
     case "ADD_ITEM": {
       const newItem: any = action.payload;
@@ -25,6 +30,8 @@ const reducer = (state: any, action: any) => {
             item.title === existingItem.title ? newItem : item
           )
         : [...state.cart.cartItems, newItem];
+
+      Cookies.set("cart", JSON.stringify({ ...state.cart, cartItems }));
 
       return { ...state, cart: { ...state.cart, cartItems } };
     }
